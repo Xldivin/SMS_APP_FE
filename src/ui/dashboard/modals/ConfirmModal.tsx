@@ -54,7 +54,7 @@ const ConfirmModal = ({
                             onChange={(e) => setSelectedPaymentMethod(e.target.value)}
                             className="mr-2"
                         />
-                        <label htmlFor="tuesdayWallet" className="text-[primary]">Tuesday Wallet</label>
+                        <label htmlFor="tuesdayWallet" className="text-[primary]">Wallet</label>
                     </div>
                 </div>
 
