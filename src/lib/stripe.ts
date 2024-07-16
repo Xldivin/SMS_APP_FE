@@ -2,7 +2,7 @@ import stripe from 'stripe';
 
 export async function createCheckoutSession(totalPrice: number, userId: string) {
     try {
-        const privateKey = "sk_test_51LxqGxFeA7WsV1R0cDciWjyOz0kKsmcmBYJp6OA6GVIs2JZBXkxPKjz4njcNhIE2C9gtv2mvwipHjIXokmkzgL6h0024TrmpvY";
+        const privateKey = "sk_test_51NDsFIAtBcpHWb8jWy3pXohalapfOpnhc5xbl75jpcZChSt3Til8iFbmnPwgNP6zzSIcP7JbdYbZCXdiZTjq9o8300DISaFJ8K";
 
         const stripeClient = new stripe(privateKey, {
             apiVersion: '2024-04-10',
@@ -24,8 +24,8 @@ export async function createCheckoutSession(totalPrice: number, userId: string) 
             payment_method_types: ["card"],
             mode: "payment",
             line_items: [lineItem],
-            success_url: `https://dashboard.tuesday.africa/payment`,
-            cancel_url: `https://dashboard.tuesday.africa/failed`,
+            success_url: `https://tuesday-app.vercel.app/dashboard/payment`,
+            cancel_url: `https://tuesday-app.vercel.app/failed`,
             metadata: {
                 userId: userId,
                 displayAmount: totalPrice.toString()

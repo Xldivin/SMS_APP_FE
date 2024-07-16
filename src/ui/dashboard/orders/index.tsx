@@ -53,7 +53,7 @@ const OrdersPage = ({ token }: any) => {
                 </div>
             </div>
             <TabsContent value="pending">
-                <div className='flex flex-col gap-[10px] sm:gap-[12px] md:gap-[16px] lg:gap-[20px] xl:gap-[24px] 2xl:gap-[28px]'>
+                <div className='flex flex-col gap-[10px] h-[100vh] sm:gap-[12px] md:gap-[16px] lg:gap-[20px] xl:gap-[24px] 2xl:gap-[28px]'>
                     <div>
                         <Card className='w-[100%] mt-[1rem] pt-[1rem] pl-[0.3rem] dark:bg-[#151515] overflow-auto lg:w-[100%]'>
                             <Table className='w-[100%] h-[7rem]'>
@@ -64,7 +64,6 @@ const OrdersPage = ({ token }: any) => {
                                         <TableHead className="hidden sm:table-cell">Shares</TableHead>
                                         <TableHead className="hidden md:table-cell">Status</TableHead>
                                         <TableHead className={`hidden md:table-cell`}>Action</TableHead>
-                                        <TableHead className={`sm:table-cell`}>Decline</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody >
@@ -95,7 +94,7 @@ const OrdersPage = ({ token }: any) => {
                                                     {order.action}
                                                 </div>
                                             </TableCell>
-                                            <TableCell className="sm:table-cell">
+                                            {/* <TableCell className="sm:table-cell">
                                                 <div className="mt-[13px]">
                                                     <Button
                                                         variant="outline"
@@ -105,7 +104,7 @@ const OrdersPage = ({ token }: any) => {
                                                         Cancel
                                                     </Button>
                                                 </div>
-                                            </TableCell>
+                                            </TableCell> */}
                                         </TableRow>
                                     ))}
                                 </TableBody>
