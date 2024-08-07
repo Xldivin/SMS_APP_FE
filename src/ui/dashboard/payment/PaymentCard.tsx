@@ -217,86 +217,88 @@ const PaymentCard = ({ profile, token }: any) => {
                         </div>
                     </form>
                 </TabsContent>
-                {/* WITHDRAWAL */}
-                <TabsContent value="withdrawal">
-                    <Tabs defaultValue="card">
-                        <div className="flex px-2">
-                            <div className="flex">
-                                <TabsList className=''>
-                                    <TabsTrigger className='px-1.5 py-1.5 text-xs font-normal ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-[#FFD84A]' value="card">Card</TabsTrigger>
-                                    <TabsTrigger className='px-1.5 py-1.5 text-xs font-normal ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-[#FFD84A]' value="momo">Mobile Money</TabsTrigger>
-                                </TabsList>
-                            </div>
-                        </div>
-                        {/* CARD WITHDRAWAL */}
-                        <TabsContent value="card">
-                            <div>
-                                <form onSubmit={(e) => {
-                                    e.preventDefault();
-                                    openModal()
-                                }}>
-                                    <div className='pl-3'>
-                                        <Input type="number" name="amount" id="amount" className="mt-[1rem] w-[96%]" placeholder="Withdrawal Amount" value={formik2.values.amount} onChange={formik2.handleChange} onBlur={formik2.handleBlur} />
-                                        {formik2.touched.amount && formik2.errors.amount ? (
-                                            <div className="text-red-600">{formik2.errors.amount}</div>
-                                        ) : null}
-                                        <Input name="bank" id="amount" className="mt-[1rem] w-[96%]" placeholder="Account Number" value={formik2.values.bank} onChange={formik2.handleChange} onBlur={formik2.handleBlur} />
-                                        {formik2.touched.bank && formik2.errors.bank ? (
-                                            <div className="text-red-600">{formik2.errors.bank}</div>
-                                        ) : null}
-                                        <Input name="sortCode" id="amount" className="mt-[1rem] w-[96%]" placeholder="Swift Code" value={formik2.values.sortCode} onChange={formik2.handleChange} onBlur={formik2.handleBlur} />
-                                        {formik2.touched.sortCode && formik2.errors.sortCode ? (
-                                            <div className="text-red-600">{formik2.errors.sortCode}</div>
-                                        ) : null}
-                                        <button
-                                            className="text-white mt-[1rem] bg-[#0757BA] border flex justify-center items-center space-x-2 dark:bg-[#000] dark:border-gray-100 w-[96%] py-2 rounded-md"
-                                        >
-                                            {isLoading ? 'Loading...' : (
-                                                <>
-                                                    <p>{"Confirm"}</p>
-                                                </>
-                                            )}
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </TabsContent>
-                        {/* MOMO WITHDRAWAL */}
-                        <TabsContent value="momo">
-                            <div>
-                                <form onSubmit={(e) => {
-                                    e.preventDefault();
-                                    openModalMomo()
-                                }}>
-                                    <div className='pl-3'>
-                                        <Input type="number" name="amount" id="amount" className="mt-[1rem] w-[96%]" placeholder="Withdrawal Amount" value={formik3.values.amount} onChange={formik3.handleChange} onBlur={formik3.handleBlur} />
-                                        {formik3.touched.amount && formik3.errors.amount ? (
-                                            <div className="text-red-600">{formik3.errors.amount}</div>
-                                        ) : null}
-                                        <Input name="number" id="amount" className="mt-[1rem] w-[96%]" placeholder="mobile money number" value={formik3.values.number} onChange={formik3.handleChange} onBlur={formik3.handleBlur} />
-                                        {formik3.touched.number && formik3.errors.number ? (
-                                            <div className="text-red-600">{formik3.errors.number}</div>
-                                        ) : null}
-                                        <button
-                                            className="text-white mt-[1rem] bg-[#0757BA] border flex justify-center items-center space-x-2 dark:bg-[#000] dark:border-gray-100 w-[96%] py-2 rounded-md"
-                                        >
-                                            {isLoading ? 'Loading...' : (
-                                                <>
-                                                    <p>{"Confirm"}</p>
-                                                </>
-                                            )}
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </TabsContent>
-                        <WithdrawalModal isOpen={modalOpen} onClose={closeModal} onConfirm={handleWithdrawStripe} />
-                        <WithdrawalModal isOpen={modalOpenMomo} onClose={closeModalMomo} onConfirm={handleWithdrawFlutterWave} />
-                    </Tabs>
-                </TabsContent>
             </Tabs>
         </Card>
     )
 }
 
 export default PaymentCard;
+
+
+                // {/* WITHDRAWAL */}
+                // <TabsContent value="withdrawal">
+                //     <Tabs defaultValue="card">
+                //         <div className="flex px-2">
+                //             <div className="flex">
+                //                 <TabsList className=''>
+                //                     <TabsTrigger className='px-1.5 py-1.5 text-xs font-normal ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-[#FFD84A]' value="card">Card</TabsTrigger>
+                //                     <TabsTrigger className='px-1.5 py-1.5 text-xs font-normal ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-[#FFD84A]' value="momo">Mobile Money</TabsTrigger>
+                //                 </TabsList>
+                //             </div>
+                //         </div>
+                //         {/* CARD WITHDRAWAL */}
+                //         <TabsContent value="card">
+                //             <div>
+                //                 <form onSubmit={(e) => {
+                //                     e.preventDefault();
+                //                     openModal()
+                //                 }}>
+                //                     <div className='pl-3'>
+                //                         <Input type="number" name="amount" id="amount" className="mt-[1rem] w-[96%]" placeholder="Withdrawal Amount" value={formik2.values.amount} onChange={formik2.handleChange} onBlur={formik2.handleBlur} />
+                //                         {formik2.touched.amount && formik2.errors.amount ? (
+                //                             <div className="text-red-600">{formik2.errors.amount}</div>
+                //                         ) : null}
+                //                         <Input name="bank" id="amount" className="mt-[1rem] w-[96%]" placeholder="Account Number" value={formik2.values.bank} onChange={formik2.handleChange} onBlur={formik2.handleBlur} />
+                //                         {formik2.touched.bank && formik2.errors.bank ? (
+                //                             <div className="text-red-600">{formik2.errors.bank}</div>
+                //                         ) : null}
+                //                         <Input name="sortCode" id="amount" className="mt-[1rem] w-[96%]" placeholder="Swift Code" value={formik2.values.sortCode} onChange={formik2.handleChange} onBlur={formik2.handleBlur} />
+                //                         {formik2.touched.sortCode && formik2.errors.sortCode ? (
+                //                             <div className="text-red-600">{formik2.errors.sortCode}</div>
+                //                         ) : null}
+                //                         <button
+                //                             className="text-white mt-[1rem] bg-[#0757BA] border flex justify-center items-center space-x-2 dark:bg-[#000] dark:border-gray-100 w-[96%] py-2 rounded-md"
+                //                         >
+                //                             {isLoading ? 'Loading...' : (
+                //                                 <>
+                //                                     <p>{"Confirm"}</p>
+                //                                 </>
+                //                             )}
+                //                         </button>
+                //                     </div>
+                //                 </form>
+                //             </div>
+                //         </TabsContent>
+                //         {/* MOMO WITHDRAWAL */}
+                //         <TabsContent value="momo">
+                //             <div>
+                //                 <form onSubmit={(e) => {
+                //                     e.preventDefault();
+                //                     openModalMomo()
+                //                 }}>
+                //                     <div className='pl-3'>
+                //                         <Input type="number" name="amount" id="amount" className="mt-[1rem] w-[96%]" placeholder="Withdrawal Amount" value={formik3.values.amount} onChange={formik3.handleChange} onBlur={formik3.handleBlur} />
+                //                         {formik3.touched.amount && formik3.errors.amount ? (
+                //                             <div className="text-red-600">{formik3.errors.amount}</div>
+                //                         ) : null}
+                //                         <Input name="number" id="amount" className="mt-[1rem] w-[96%]" placeholder="mobile money number" value={formik3.values.number} onChange={formik3.handleChange} onBlur={formik3.handleBlur} />
+                //                         {formik3.touched.number && formik3.errors.number ? (
+                //                             <div className="text-red-600">{formik3.errors.number}</div>
+                //                         ) : null}
+                //                         <button
+                //                             className="text-white mt-[1rem] bg-[#0757BA] border flex justify-center items-center space-x-2 dark:bg-[#000] dark:border-gray-100 w-[96%] py-2 rounded-md"
+                //                         >
+                //                             {isLoading ? 'Loading...' : (
+                //                                 <>
+                //                                     <p>{"Confirm"}</p>
+                //                                 </>
+                //                             )}
+                //                         </button>
+                //                     </div>
+                //                 </form>
+                //             </div>
+                //         </TabsContent>
+                //         <WithdrawalModal isOpen={modalOpen} onClose={closeModal} onConfirm={handleWithdrawStripe} />
+                //         <WithdrawalModal isOpen={modalOpenMomo} onClose={closeModalMomo} onConfirm={handleWithdrawFlutterWave} />
+                //     </Tabs>
+                // </TabsContent>
