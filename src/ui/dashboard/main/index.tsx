@@ -34,6 +34,7 @@ import BuySellCard from './BuySellCard';
 import { StockInfo, UserProfile } from '@/types';
 import { ToastContainer, toast } from "react-toastify";
 import { profile, stocks, orders, portfolioStocks, stockTable, graphData } from '@/lib/constant';
+import Products from '../products';
 
 const MainDashboard = ({ isCollapsed, token }: any) => {
     const [stocksTable, setstocksTable] = useState([]);
@@ -172,17 +173,16 @@ const MainDashboard = ({ isCollapsed, token }: any) => {
     return (
         <div data-testid="main-dashboard" className='flex flex-col gap-[10px] xl:flex-row sm:gap-[12px] md:gap-[16px] lg:gap-[20px] -mt-[1.6rem] xl:gap-[20px]'>
             <div className={`w-full lg:${isCollapsed ? "w-[75%]" : "w-50%"} 2xl:w-[70%]`}>
-                <p className='pb-[0.5rem] font-bold text-xl'>Buy/Sell</p>
+                <p className='pb-[0.5rem] font-bold text-xl'>Stock </p>
                 <div className='flex gap-[1rem] flex-col'>
                     <div className='flex flex-col gap-[1rem] lg:flex-row'>
-                        <BuySellCard stocks={stocks} profile={profile} token={token} />
                         <Card className="w-[100%] h-[24rem] pb-[0.5rem] dark:bg-[#151515] lg:w-[80%] 2xl:w-[50%]">
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-lg">
                                     <div className="flex gap-[2rem] justify-between">
                                         <div className="flex flex-row gap-[2rem]">
                                             <div>
-                                                <p className="text-sm">Trades Overview</p>
+                                                <p className="text-sm">Stocks Chart</p>
                                             </div>
                                         </div>
                                     </div>
@@ -206,62 +206,13 @@ const MainDashboard = ({ isCollapsed, token }: any) => {
                                 </CardDescription>
                             </CardHeader>
                         </Card>
-                    </div>
-                    <div className='flex flex-col gap-[1rem] lg:flex-row'>
-                        <Card className="w-full h-[24rem] pb-[2.1rem] dark:bg-[#151515] lg:w-[50%] 2xl:w-[50%] overflow-hidden">
-                            <CardHeader className="pb-3">
-                                <CardTitle className="text-lg">
-                                    <div className="flex gap-8 justify-between">
-                                        <div className="flex flex-row">
-                                            <div>
-                                                <p className="text-sm">Trade Overview</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </CardTitle>
-                                <div
-                                    className="max-w-lg h-80 overflow-auto"
-                                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                                >
-                                    <CardDescription className="text-balance leading-relaxed">
-                                        {portfolioStocks?.map((item: any) => (
-                                            <div key={item.id}>
-                                                <div className='flex justify-between pt-2'>
-                                                    <div className='flex gap-2'>
-                                                        <Image
-                                                            width={40}
-                                                            height={30}
-                                                            src={item?.stock?.image}
-                                                            className="object-contain"
-                                                            alt="user image"
-                                                        />
-                                                        <div className='relative top-1'>
-                                                            <p className='text-primary font-semibold'>{item?.stock?.symbol}</p>
-                                                            <p className='text-[12px]'>{item?.stock?.name}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div className='w-[5rem]'>
-                                                        <p className='text-primary font-bold'>{item?.amount} shares</p>
-                                                        <div className='flex'>
-                                                            <p className={`font-normal ${getTextColor(item?.stock?.movement)}`}>{item?.stock?.percentageChange.toFixed(2)}%</p>
-                                                            {getMovementIcon(item?.stock?.movement)}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <Separator className='mt-4' />
-                                            </div>
-                                        ))}
-                                    </CardDescription>
-                                </div>
-                            </CardHeader>
-                        </Card>
-                        <Card className="w-[100%] h-[24rem] pb-[1rem] dark:bg-[#151515] lg:w-[50%] 2xl:w-[50%]">
+                        <Card className="w-[100%] h-[24rem] pb-[0.5rem] dark:bg-[#151515] lg:w-[80%] 2xl:w-[50%]">
                             <CardDescription>
                                 <Tabs defaultValue="week" onValueChange={setTab}>
                                     <div className="flex justify-between px-3 py-1">
                                         <div className="flex flex-row gap-[2rem]">
                                             <div className='relative top-[1rem]'>
-                                                <p className="text-sm text-primary font-semibold">Trades Overview</p>
+                                                <p className="text-sm text-primary font-semibold">Stocks Chart</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center w-[9rem] relative ml-[2rem]">
@@ -274,7 +225,7 @@ const MainDashboard = ({ isCollapsed, token }: any) => {
                                         </div>
                                     </div>
                                     <TabsContent value="week">
-                                        <p className="ml-[0.7rem] mt-[1rem] text-xs">Portfolio Balance</p>
+                                        <p className="ml-[0.7rem] mt-[1rem] text-xs">Account Balance</p>
                                         <p className="text-2xl text-primary ml-[0.7rem] mt-[1rem]">
                                             {profile?.account_balance.toLocaleString()}
                                         </p>
@@ -298,158 +249,8 @@ const MainDashboard = ({ isCollapsed, token }: any) => {
                             </CardDescription>
                         </Card>
                     </div>
-                    <div className='pb-[2rem]'>
-                        <div className='hidden md:flex flex-wrap gap-[1rem]'>
-                            <p className='pt-[1rem] pb-[0.5rem] text-lg font-bold'>Statistics</p>
-                        </div>
-                        <div className='flex flex-col gap-[10px] md:hidden'>
-                            <div className=''>
-                                <p className='pt-[1rem] pb-[0.5rem] text-lg font-bold'>Statistics</p>
-                            </div>
-                        </div>
-                        <Card className='w-[100%] h-[100%] mt-[1rem] dark:bg-[#151515]'>
-                            <Tabs defaultValue="all">
-                                <div className="flex flex-col px-4 py-1">
-                                    <div className="flex flex-row gap-[2rem]">
-                                        <div className='pt-2'>
-                                            <p className="text-lg text-primary">Stock Market</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex w-[100%]">
-                                        <TabsList className='flex justify-center items-center flex-wrap md:flex-nowrap gap-[0.7rem]'>
-                                            <TabsTrigger className='inline-flex w-10 z-10 border-[1px] text-primary font-normal border-[#000] dark:border-[#fff] rounded-2xl justify-center px-1 py-1.5 text-[9px] transition-all disabled:opacity-50 data-[state=active]:text-[#fff] data-[state=active]:bg-[#000] dark:data-[state=active]:bg-[#fff] dark:data-[state=active]:text-[#000]' value="all">All</TabsTrigger>
-                                            <TabsTrigger className='inline-flex z-10 border-[1px] text-primary font-normal border-[#000] dark:border-[#fff] rounded-2xl justify-center px-1 py-1.5 text-[9px] transition-all disabled:opacity-50 data-[state=active]:text-[#fff] data-[state=active]:bg-[#000] dark:data-[state=active]:bg-[#fff] dark:data-[state=active]:text-[#000]' value="finance">Finance Service</TabsTrigger>
-                                            <TabsTrigger className='inline-flex z-10 border-[1px] text-primary font-normal border-[#000] dark:border-[#fff] rounded-2xl justify-center px-1 py-1.5 text-[9px] transition-all disabled:opacity-50 data-[state=active]:text-[#fff] data-[state=active]:bg-[#000] dark:data-[state=active]:bg-[#fff] dark:data-[state=active]:text-[#000]' value="energy">Energy</TabsTrigger>
-                                            <TabsTrigger className='inline-flex z-10 border-[1px] text-primary font-normal border-[#000] dark:border-[#fff] rounded-2xl justify-center px-1 py-1.5 text-[9px] transition-all disabled:opacity-50 data-[state=active]:text-[#fff] data-[state=active]:bg-[#000] dark:data-[state=active]:bg-[#fff] dark:data-[state=active]:text-[#000]' value="materials">Materials</TabsTrigger>
-                                            <TabsTrigger className='inline-flex z-10 border-[1px] text-primary font-normal border-[#000] dark:border-[#fff] rounded-2xl justify-center px-1 py-1.5 text-[9px] transition-all disabled:opacity-50 data-[state=active]:text-[#fff] data-[state=active]:bg-[#000] dark:data-[state=active]:bg-[#fff] dark:data-[state=active]:text-[#000]' value="technology">Technology</TabsTrigger>
-                                            <TabsTrigger className='inline-flex z-10 border-[1px] text-primary font-normal border-[#000] dark:border-[#fff] rounded-2xl justify-center px-1 py-1.5 text-[9px] transition-all disabled:opacity-50 data-[state=active]:text-[#fff] data-[state=active]:bg-[#000] dark:data-[state=active]:bg-[#fff] dark:data-[state=active]:text-[#000]' value="consumer">Consumer Staples</TabsTrigger>
-                                            <TabsTrigger className='inline-flex z-10 border-[1px] text-primary font-normal border-[#000] dark:border-[#fff] rounded-2xl justify-center px-1 py-1.5 text-[9px] transition-all disabled:opacity-50 data-[state=active]:text-[#fff] data-[state=active]:bg-[#000] dark:data-[state=active]:bg-[#fff] dark:data-[state=active]:text-[#000]' value="media">Media</TabsTrigger>
-                                            <TabsTrigger className='inline-flex z-10 border-[1px] text-primary font-normal border-[#000] dark:border-[#fff] rounded-2xl justify-center px-1 py-1.5 text-[9px] transition-all disabled:opacity-50 data-[state=active]:text-[#fff] data-[state=active]:bg-[#000] dark:data-[state=active]:bg-[#fff] dark:data-[state=active]:text-[#000]' value="industrials">Industrials</TabsTrigger>
-                                            <TabsTrigger className='inline-flex z-10 border-[1px] text-primary font-normal border-[#000] dark:border-[#fff] rounded-2xl justify-center px-1 py-1.5 text-[9px] transition-all disabled:opacity-50 data-[state=active]:text-[#fff] data-[state=active]:bg-[#000] dark:data-[state=active]:bg-[#fff] dark:data-[state=active]:text-[#000]' value="healthcare">Healthcare</TabsTrigger>
-                                        </TabsList>
-                                    </div>
-                                </div>
-                                <TabsContent value="all" className='flex justify-center align-center pt-[4rem] lg:pt-[0rem]'>
-                                    <Table className='w-[100%]'>
-                                        <TableHeader className='[&_tr]:border-0'>
-                                            <TableRow >
-                                                <TableHead>Asset Name</TableHead>
-                                                <TableHead className="sm:table-cell">Price</TableHead>
-                                                <TableHead className="hidden sm:table-cell">Change</TableHead>
-                                                <TableHead className="hidden md:table-cell">MarketCap</TableHead>
-                                            </TableRow>
-                                        </TableHeader>
-                                        <TableBody>
-                                            {stockTable?.map((asset: any, index: any) => (
-                                                <TableRow key={index}>
-                                                    <TableCell className='flex relative top-[0.1rem]'>
-                                                        <Image
-                                                            width={30}
-                                                            height={30}
-                                                            src={asset.stock.image}
-                                                            className="relative left-[0.5rem] h-[2rem]"
-                                                            alt={asset.assetFullName}
-                                                        />
-                                                        <div className="font-medium text-xs ml-[15px] mt-[10px] flex gap-[7px]">
-                                                            <p>{asset.stock.symbol}</p>
-                                                            <p className='text-[#6F6F6F] text-xs font-light'>{asset.stock.name}</p>
-                                                        </div>
-                                                    </TableCell>
-                                                    <TableCell className="sm:table-cell">
-                                                        ${asset.stock.price.toLocaleString()}
-                                                    </TableCell>
-                                                    <TableCell className={`hidden md:flex hidden md:flex relative ${isCollapsed ? "bottom-[0.6rem]" : ""}`}>
-                                                        <p className='text-md text-green-500'>{asset.change}</p>
-                                                        <TiArrowSortedDown className={`relative w-3 h-3 text-green-500 top-[0.3rem]`} />
-                                                    </TableCell>
-                                                    <TableCell className="hidden md:table-cell">
-                                                        {truncateNumber(asset.market_cap, 9)}
-                                                    </TableCell>
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
-                                </TabsContent>
-                            </Tabs>
-                            <BuySellForm isOpen={buySellModal} onClose={closeModal} profile={profile} token={token} selectedAsset={selectedAsset} />
-                        </Card>
-                    </div>
+                    <Products />
                 </div>
-            </div>
-            <div className={`pt-[2.3rem] mb-[2rem]`}>
-                <Card className={`w-[100%] h-[100%] p-[8px] flex justify-center align-center dark:bg-[#151515]`}>
-                    <CardDescription>
-                        <div className="flex flex-row gap-[2rem] p-2">
-                            <div>
-                                <p className="text-sm text-primary font-semibold">Order Book</p>
-                            </div>
-                        </div>
-                        <Table className='w-[20rem] h-[100%] mt-[1rem] lg:w-[100%]'>
-                            <TableHeader className='mt-[4rem] h-[4rem] [&_tr]:border-0 overflow-hidden rounded-lg'>
-                                <div className='bg-muted dark:bg-[#000] rounded-lg w-[99.8%] h-[3rem]'>
-                                    <TableRow className={`flex`}>
-                                        <TableHead className={`flex text-xs relative top-[1rem] left-[1rem] lg:left-[0rem]`}>
-                                            Price
-                                            <ArrowDownUp strokeWidth={1} className='w-4 h-4' />
-                                        </TableHead>
-                                        <TableHead className={`flex text-xs relative top-[1rem] left-[2.5rem] lg:left-[0rem]`}>
-                                            Amount
-                                            <ArrowDownUp strokeWidth={1} className='w-4 h-4' />
-                                        </TableHead>
-                                        <TableHead className={`flex text-xs relative top-[1rem] left-[4rem] lg:left-[0rem]`}>
-                                            Total
-                                            <ArrowDownUp strokeWidth={1} className='w-4 h-4' />
-                                        </TableHead>
-                                    </TableRow>
-                                </div>
-                            </TableHeader>
-                            <TableBody>
-                                {Array.from({ length: 60 }).map((_, index) => {
-                                    const row = orders[index % orders?.length];
-                                    const calculatedValue = row?.unit_price * row?.amount;
-                                    let formattedBalance = row?.unit_price?.toLocaleString();
-                                    let finalValue = calculatedValue.toLocaleString();
-                                    if (row?.action === 'sell') {
-                                        return (
-                                            <div key={index} style={{ marginBottom: '4px', marginTop: '2px' }}>
-                                                <TableRow className='border-0'>
-                                                    <TableCell className={`text-[14px] m-2 px-4  w-[8rem] text-[#C0C0C0] lg:text-[8px] lg:w-[5.5rem]`}>
-                                                        {formattedBalance}
-                                                    </TableCell>
-                                                    <TableCell className={`text-[14px] m-2 px-4  w-[6rem] bg-red-100 text-[#000] rounded-l-md lg:text-[8px] dark:bg-[#FF7A00] dark:bg-opacity-30 dark:text-[#fff] lg:w-[5.5rem]`}>
-                                                        {row?.amount}
-                                                    </TableCell>
-                                                    <TableCell className={`text-[14px] m-2 px-4  w-[6rem] bg-red-100 text-[#FF0000] rounded-r-md lg:text-[8px] dark:bg-[#FF7A00] dark:bg-opacity-30 lg:w-[4rem]`}>
-                                                        {finalValue}
-                                                    </TableCell>
-                                                </TableRow>
-                                            </div>
-                                        );
-                                    } else if (row?.action === 'buy') {
-                                        return (
-                                            <div key={index} style={{ marginBottom: '4px', marginTop: '2px' }}>
-                                                <TableRow className='border-0'>
-                                                    <TableCell className={`text-[14px] m-2 px-4 w-[8rem] bg-green-100 text-[#12B76A] rounded-l-md lg:text-[8px] dark:bg-[#12B76A] dark:bg-opacity-40 lg:w-[5.5rem]`}>
-                                                        {formattedBalance}
-                                                    </TableCell>
-                                                    <TableCell className={`text-[14px] m-2 px-4  w-[6rem] bg-green-100 text-[#000] rounded-r-md lg:text-[8px] dark:text-[#fff] dark:bg-[#12B76A] dark:bg-opacity-40 lg:w-[5.5rem]`}>
-                                                        {row?.amount}
-                                                    </TableCell>
-                                                    <TableCell className={`text-[14px] m-2 px-4  w-[6rem] text-[#C0C0C0] lg:text-[8px] lg:w-[4rem]`}>
-                                                        {finalValue}
-                                                    </TableCell>
-                                                </TableRow>
-                                            </div>
-                                        );
-                                    }
-
-                                    return null;
-                                })}
-                            </TableBody>
-
-                        </Table>
-                    </CardDescription>
-                </Card>
             </div>
         </div>
     );

@@ -13,8 +13,8 @@ import logo from '../public/logo symbol-01 3.svg'
 const inter = Inter({ subsets: ["latin"] });
 
 const metadata: Metadata = {
-  title: "Tuesday Dashboard",
-  description: "Tuesday Customer Dashboard",
+  title: "SMS Application",
+  description: "SMS Application",
 };
 
 export default function RootLayout({

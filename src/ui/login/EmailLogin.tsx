@@ -7,18 +7,15 @@ import Spinner from "../dashboard/utilscomponent/Spinner";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import Cookies from 'js-cookie';
+import Link from 'next/link';
 
 const EmailLogin = () => {
   const router = useRouter();
   const [isloading, setIsloading] = useState('false');
 
   const initialData = {
-    email: "",
-  };
-
-  const simulateLogin = (email:any) => {
-    const validEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return validEmailRegex.test(email);
+    username: "",
+    password: ""
   };
 
   const { errors, values, handleBlur, handleChange, handleSubmit } = useFormik({
@@ -28,39 +25,61 @@ const EmailLogin = () => {
     onSubmit: async () => {
       try {
         setIsloading('true')
-        const isValidEmail = simulateLogin(values.email);
-        
-        if (!isValidEmail) {
-          throw new Error("Invalid email");
+
+        const response = await fetch('http://localhost:8081/auth/signin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: values.username,
+            password: values.password,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Invalid email or password");
         }
 
+        const data = await response.json();
+
         // Simulate successful login
-        Cookies.set('accessToken', 'fakeToken');
+        Cookies.set('accessToken', data.token);
 
         toast.success("Login successful");
         router.push('/dashboard');
-      } catch (error) {
-        toast.error("Invalid email");
-      } finally{
+      } catch (error: any) {
+        toast.error(error);
+      } finally {
         setIsloading("false")
       }
     },
   });
 
-  const isReady = !values.email ;
+  const isReady = !values.username;
 
   return (
     <form className="w-full" onSubmit={handleSubmit}>
       <FormControl>
         <FormInput
-          name="email"
-          label="Email"
-          type="email"
-          placeholder="Enter valid email"
+          name="username"
+          label="Username"
+          type="username"
+          placeholder="Enter username"
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors.email}
-          value={values.email}
+          error={errors.username}
+          value={values.username}
+        />
+        <FormInput
+          name="password"
+          label="Password"
+          type="password"
+          placeholder="Enter valid password"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors.password}
+          value={values.password}
         />
       </FormControl>
       <GGButton type="submit" disable={isReady}>
@@ -68,6 +87,14 @@ const EmailLogin = () => {
           {isloading ? "Sign In" : <Spinner />}
         </span>
       </GGButton>
+      <div>
+        <p className="text-gray-800/50 font-sans">
+          Don't have the account Signup?{" "}
+          <Link href="/signup" className="text-[#0177fd]">
+            SignUp
+          </Link>
+        </p>
+      </div>
     </form>
   );
 };

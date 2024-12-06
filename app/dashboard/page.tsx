@@ -38,11 +38,6 @@ const HomeDashboard = () => {
       ) : (
         <>
           <div className="lg:col-span-3">
-            <div className="2xl:hidden">
-              <MainCarousel token={token} />
-            </div>
-          </div>
-          <div className="lg:col-span-3">
             <div className={`grid items-start gap-4 md:gap-6 2xl:flex 2xl:justify-center`}>
               <MainDashboard isCollapsed={isCollapsed} token={token} />
             </div>

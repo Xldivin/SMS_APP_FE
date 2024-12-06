@@ -25,18 +25,6 @@ const Register = () => {
         />
       </div>
       <div className="flex flex-col justify-center max-sm:px-8 sm:px-8 lg:px-20 max-sm:items-center">
-        <div className="flex items-center">
-          <Link href="/register" className="flex items-center">
-            <Image
-              width={50}
-              height={50}
-              alt="tuesday markets logo"
-              src={Logo}
-              className="w-[50px] h-[50px]"
-            />
-            <h1 className="font-bold text-md font-sans ml-[-8px]">tuesday</h1>
-          </Link>
-        </div>
         <div className="w-full">
           <RegisterAuthentication />
         </div>
