@@ -89,7 +89,7 @@ const EmailLogin = () => {
       </GGButton>
       <div>
         <p className="text-gray-800/50 font-sans">
-          Don't have the account Signup?{" "}
+          Don&apos;t have the account Signup?{" "}
           <Link href="/signup" className="text-[#0177fd]">
             SignUp
           </Link>
