@@ -37,7 +37,7 @@ const RegisterAuthentication = () => {
       try {
         setIsloading('true')
 
-        const response = await fetch('http://localhost:8081/auth/signup', {
+        const response = await fetch('https://sms-app-1-2wl7.onrender.com/auth/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -50,7 +50,7 @@
 //     useEffect(() => {
 //         const fetchProducts = async () => {
 //             try {
-//                 const response = await fetch('http://localhost:8081/products/all', {
+//                 const response = await fetch('https://sms-app-1-2wl7.onrender.com/products/all', {
 //                     method: 'GET',
 //                     headers: {
 //                         'Content-Type': 'application/json',
@@ -215,7 +215,7 @@ export default function Products() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:8081/products/all', {
+                const response = await fetch('https://sms-app-1-2wl7.onrender.com/products/all', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

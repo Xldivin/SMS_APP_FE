@@ -26,7 +26,7 @@ const EmailLogin = () => {
       try {
         setIsloading('true')
 
-        const response = await fetch('http://localhost:8081/auth/signin', {
+        const response = await fetch('https://sms-app-1-2wl7.onrender.com/auth/signin', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
