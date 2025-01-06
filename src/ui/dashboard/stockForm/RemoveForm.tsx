@@ -12,7 +12,7 @@ const RemoveForm: React.FC = () => {
     const fetchProducts = async () => {
       try {
   
-        const response = await fetch('https://sms-app-1-2wl7.onrender.com/products/all', {
+        const response = await fetch('https://sms-app-r1uh.onrender.com/products/all', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const RemoveForm: React.FC = () => {
     }
 
     try {
-      const response = await fetch(`https://sms-app-1-2wl7.onrender.com/products/product/${selectedProductId}`, {
+      const response = await fetch(`https://sms-app-r1uh.onrender.com/products/product/${selectedProductId}`, {
         method: 'DELETE',
         headers: { 
            Authorization: `Bearer ${token}`

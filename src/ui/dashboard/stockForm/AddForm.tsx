@@ -10,7 +10,7 @@ const AddForm: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('https://sms-app-1-2wl7.onrender.com/categories/all', {
+        const response = await fetch('https://sms-app-r1uh.onrender.com/categories/all', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const AddForm: React.FC = () => {
     };
 
     try {
-      const response = await fetch('https://sms-app-1-2wl7.onrender.com/products/product', {
+      const response = await fetch('https://sms-app-r1uh.onrender.com/products/product', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
